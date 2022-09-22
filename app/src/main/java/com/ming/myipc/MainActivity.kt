@@ -8,10 +8,14 @@ import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
 import com.ming.myipc.bindservice.BindService
 import com.ming.myipc.databinding.ActivityMainBinding
 import com.ming.myipc.startservice.StartIntentService
 import com.ming.myipc.startservice.StartService
+import com.ming.myipc.workmanager.JobHandle
 
 class MainActivity : AppCompatActivity() {
 
@@ -58,6 +62,10 @@ class MainActivity : AppCompatActivity() {
                 it.setClass(this@MainActivity, AidlActivity::class.java)
                 startActivity(it)
             }
+        }
+        binding.work.setOnClickListener {
+            val work: WorkRequest = OneTimeWorkRequestBuilder<JobHandle>().build()
+            WorkManager.getInstance(this@MainActivity).enqueue(work)
         }
     }
 

@@ -31,7 +31,9 @@
 
         <service android:name=".startservice.StartIntentService" />
         <service android:name=".startservice.StartService" />
-        <service android:name=".bindservice.BindService" />
+        <service
+            android:name=".bindservice.BindService"
+            android:description="@string/service_description" />
         <service
             android:name=".messengerservice.MessengerService"
             android:exported="true" />

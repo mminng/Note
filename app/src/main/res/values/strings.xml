@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MyIPC</string>
+    <string name="service_description">实用计数器服务</string>
 </resources>
