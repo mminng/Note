@@ -8,7 +8,9 @@ import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
 import com.ming.myipc.bindservice.BindService
@@ -64,8 +66,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.work.setOnClickListener {
-            val work: WorkRequest = OneTimeWorkRequestBuilder<JobHandle>().build()
-            WorkManager.getInstance(this@MainActivity).enqueue(work)
+            val work: WorkRequest = OneTimeWorkRequestBuilder<JobHandle>()
+//                .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+                .build()
+            WorkManager.getInstance(this@MainActivity)
+                .getWorkInfoByIdLiveData(work.id)
+                .observe(this, Observer {
+                    if (it.state == WorkInfo.State.SUCCEEDED) {
+                        Log.i("wtf", "success!")
+                    }
+                })
+            WorkManager.getInstance(this@MainActivity)
+                .enqueue(work)
         }
     }
 

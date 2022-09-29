@@ -4,11 +4,10 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.*
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.ming.ipctest.databinding.ActivityMainBinding
 import com.ming.myipc.aidl.RemoteAidl
-import com.ming.myipc.aidl.RemotePar
 
 class MainActivity : AppCompatActivity() {
 
